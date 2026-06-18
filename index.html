@@ -1,1 +1,371 @@
-file:///C:/Users/megynflood/Downloads/PNUR121_Ch13_EscapeRoom%20(4).html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mr. H. Is Going Home — PNUR 121 Escape Room</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#F4F6F9;min-height:100vh;color:#1A1A1A}
+.screen{display:none;flex-direction:column;align-items:center;padding:1.5rem 1rem;min-height:100vh}
+.screen.active{display:flex}
+.topbar{width:100%;max-width:780px;display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding:.65rem 1.1rem;background:#1B3A6B;border-radius:10px;color:#fff}
+.ttl{font-size:15px;font-weight:500}
+.tpill{background:rgba(255,255,255,.18);border-radius:20px;padding:4px 14px;font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.05em}
+.tpill.urgent{background:#c0392b;animation:puls 1s infinite}
+@keyframes puls{0%,100%{opacity:1}50%{opacity:.65}}
+.card{background:#fff;border:1px solid #E0E0E0;border-radius:14px;padding:1.5rem;width:100%;max-width:780px;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.ctitle{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#888;margin-bottom:.5rem}
+#screen-landing{justify-content:center;text-align:center}
+.lhouse{font-size:80px;margin-bottom:.75rem;line-height:1}
+.ltitle{font-size:28px;font-weight:600;color:#1B3A6B;margin-bottom:.4rem}
+.lsub{font-size:15px;color:#666;margin-bottom:.4rem;line-height:1.6}
+.lsub2{font-size:13px;color:#999;margin-bottom:2rem;line-height:1.5}
+.lform{width:100%;max-width:420px;text-align:left}
+.lform label{font-size:13px;color:#555;margin-bottom:5px;display:block;font-weight:600}
+.lform input{width:100%;padding:10px 14px;font-size:15px;border:1px solid #D0D0D0;border-radius:8px;margin-bottom:.9rem;background:#fff;color:#1A1A1A;font-family:inherit}
+.lform input:focus{outline:none;border-color:#1B3A6B;box-shadow:0 0 0 3px rgba(27,58,107,.1)}
+.btnp{width:100%;padding:13px;font-size:15px;font-weight:600;background:#1B3A6B;color:#fff;border:none;border-radius:10px;cursor:pointer}
+.btnp:hover{background:#152e56}
+.divider{margin:1.5rem 0;border:none;border-top:1px solid #E8E8E8;width:100%;max-width:420px}
+.hgrid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;width:100%;max-width:780px}
+.rbtn{background:#fff;border:1px solid #E0E0E0;border-radius:12px;padding:1.1rem 1rem;cursor:pointer;display:flex;align-items:center;gap:12px;transition:border-color .2s,box-shadow .2s;text-align:left;width:100%}
+.rbtn:hover:not(:disabled){border-color:#0E7C7B;box-shadow:0 0 0 3px rgba(14,124,123,.12)}
+.rbtn:disabled{opacity:.38;cursor:not-allowed}
+.rbtn.solved{border-color:#1A6B3A;background:#EAF5EE}
+.rico{font-size:30px;flex-shrink:0;line-height:1}
+.rname{font-size:14px;font-weight:600;color:#1A1A1A}
+.rsys{font-size:12px;color:#888;margin-top:2px}
+.rbadge{margin-left:auto;flex-shrink:0;font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px}
+.bl{background:#F0F0F0;color:#999}.bo{background:#D6E4F0;color:#1B3A6B}.bd{background:#D4EDDA;color:#155724}
+.pbwrap{width:100%;max-width:780px;background:#E0E0E0;border-radius:20px;height:7px;margin-bottom:.4rem;overflow:hidden}
+.pbfill{height:100%;background:#0E7C7B;border-radius:20px;transition:width .4s ease}
+.pblabel{width:100%;max-width:780px;font-size:13px;color:#888;margin-bottom:1rem;display:flex;justify-content:space-between}
+.sitbox{background:#EEF2F8;border-left:4px solid #1B3A6B;border-radius:0 10px 10px 0;padding:1.1rem 1.25rem;margin-bottom:1rem;font-size:15px;line-height:1.75}
+.blkbox{background:#FEF2F2;border-left:4px solid #C0392B;border-radius:0 10px 10px 0;padding:.9rem 1.25rem;margin-bottom:1rem}
+.blklbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#C0392B;margin-bottom:5px}
+.blktxt{font-size:14px;color:#1A1A1A;line-height:1.65}
+.unlockbox{background:#FEF9EC;border-left:4px solid #C9972C;border-radius:0 10px 10px 0;padding:.9rem 1.25rem;margin-bottom:1rem}
+.unlocklbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#8B6914;margin-bottom:5px}
+.unlocktxt{font-size:14px;font-weight:600;color:#5C4209;line-height:1.55}
+.tlbl{font-size:13px;font-weight:600;color:#555;margin-bottom:7px}
+.rinput{width:100%;min-height:90px;font-size:14px;line-height:1.65;padding:10px 13px;border-radius:8px;border:1px solid #D0D0D0;background:#FAFAFA;color:#1A1A1A;resize:vertical;margin-bottom:.4rem;font-family:inherit}
+.rinput:focus{outline:none;border-color:#1B3A6B;background:#fff}
+.char-count{font-size:12px;color:#AAA;text-align:right;margin-bottom:.75rem}
+.crow{display:flex;gap:10px;align-items:center;margin-bottom:1rem;flex-wrap:wrap}
+.cinput{font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;padding:10px 16px;border-radius:8px;border:1px solid #D0D0D0;background:#FAFAFA;color:#1A1A1A;width:210px;text-align:center;font-family:'Courier New',monospace}
+.cinput:focus{outline:none;border-color:#1B3A6B;background:#fff}
+.btnunlock{padding:11px 22px;font-size:14px;font-weight:600;background:#1B3A6B;color:#fff;border:none;border-radius:8px;cursor:pointer}
+.btnunlock:hover{background:#152e56}
+.hintrow{margin-bottom:1rem}
+.btnhint{padding:8px 16px;font-size:13px;font-weight:500;background:transparent;border:1px solid #C9972C;color:#8B6914;border-radius:8px;cursor:pointer;font-family:inherit}
+.btnhint:hover{background:#FEF9EC}
+.hintbox{background:#FEF9EC;border-left:4px solid #C9972C;border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:13px;line-height:1.65;color:#1A1A1A;margin-bottom:1rem;display:none}
+.hintbox.show{display:block}
+.fbbox{padding:.75rem 1rem;border-radius:8px;font-size:14px;margin-bottom:1rem;display:none;font-weight:500}
+.fbbox.show{display:block}
+.fbbox.wrong{background:#FEF2F2;border-left:3px solid #C0392B;color:#7B1D1D}
+.fbbox.correct{background:#D4EDDA;border-left:3px solid #1A6B3A;color:#155724}
+.btnback{background:transparent;border:1px solid #D0D0D0;color:#888;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;margin-right:8px;font-family:inherit}
+.btnback:hover{background:#F4F4F4}
+.ctag{display:inline-block;background:#1B3A6B;color:#fff;font-size:11px;font-weight:600;padding:3px 11px;border-radius:20px;margin-bottom:.75rem;letter-spacing:.05em}
+#screen-victory{justify-content:center;text-align:center}
+.vico{font-size:72px;margin-bottom:1rem;line-height:1}
+.vtitle{font-size:30px;font-weight:700;color:#1A6B3A;margin-bottom:.5rem}
+.vsub{font-size:16px;color:#555;margin-bottom:1.5rem;line-height:1.65}
+.tbadge{display:inline-block;background:#D4EDDA;border:2px solid #1A6B3A;color:#155724;padding:10px 28px;border-radius:24px;font-size:20px;font-weight:700;margin-bottom:1.5rem}
+.vic-actions{display:flex;flex-direction:column;gap:.75rem;align-items:center;width:100%;max-width:360px}
+.btn-dl{width:100%;padding:13px;font-size:15px;font-weight:600;background:#0E7C7B;color:#fff;border:none;border-radius:10px;cursor:pointer}
+.btn-dl:hover{background:#0a6360}
+.submit-status{font-size:13px;color:#888;margin-top:.25rem}
+.submit-status.ok{color:#1A6B3A;font-weight:600}
+.submit-status.err{color:#C0392B}
+.ihead{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:780px;margin-bottom:1rem}
+.ititl{font-size:20px;font-weight:700;color:#1B3A6B}
+.iref{font-size:12px;color:#666;background:#fff;border:1px solid #D0D0D0;padding:6px 14px;border-radius:6px;cursor:pointer;font-family:inherit}
+.iref:hover{background:#F4F4F4}
+.stats-row{display:flex;gap:.75rem;width:100%;max-width:780px;margin-bottom:1rem}
+.stat-card{background:#fff;border:1px solid #E0E0E0;border-radius:10px;padding:.85rem 1rem;flex:1;text-align:center}
+.stat-num{font-size:24px;font-weight:700;color:#1B3A6B}
+.stat-lbl{font-size:12px;color:#888;margin-top:2px}
+.gcard{background:#fff;border:1px solid #E0E0E0;border-radius:10px;padding:1rem 1.25rem;width:100%;max-width:780px;margin-bottom:.75rem}
+.ghdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;cursor:pointer;user-select:none}
+.gname{font-size:15px;font-weight:600}
+.gpct{font-size:12px;color:#888}
+.rdots{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.5rem}
+.dot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.ddone{background:#D4EDDA;color:#155724;border:1px solid #1A6B3A}
+.dpend{background:#F0F0F0;color:#AAA;border:1px solid #E0E0E0}
+.responses-panel{display:none;border-top:1px solid #EBEBEB;padding-top:.75rem;margin-top:.25rem}
+.responses-panel.open{display:block}
+.resp-room{margin-bottom:.85rem}
+.resp-room-title{font-size:11px;font-weight:700;color:#1B3A6B;margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em}
+.resp-room-text{font-size:13px;color:#333;line-height:1.65;background:#F4F6F9;border-radius:6px;padding:.65rem .85rem;white-space:pre-wrap;border-left:3px solid #1B3A6B}
+.resp-empty{font-size:13px;color:#BBB;font-style:italic}
+.nogrp{color:#888;font-size:14px;margin-top:2rem;text-align:center;line-height:1.6}
+.ktog{font-size:12px;font-weight:600;background:transparent;border:1px solid #C9972C;color:#8B6914;padding:6px 14px;border-radius:6px;cursor:pointer;margin-bottom:1rem;font-family:inherit}
+.ktog:hover{background:#FEF9EC}
+.akey{display:none;width:100%;max-width:780px;margin-bottom:1rem}
+.akey.show{display:block}
+.akroom{margin-bottom:.75rem;padding:.85rem 1.1rem;border-radius:8px;background:#F4F6F9;font-size:13px;line-height:1.7;border-left:3px solid #1B3A6B}
+.akroom strong{color:#1B3A6B;font-weight:700}
+.ak-word{display:inline-block;background:#1B3A6B;color:#fff;font-family:'Courier New',monospace;font-size:13px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.1em;margin:0 3px}
+.sheet-link{display:inline-flex;align-items:center;gap:6px;margin-bottom:1rem;font-size:13px;color:#0E7C7B;font-weight:600;text-decoration:none;border:1px solid #0E7C7B;padding:7px 16px;border-radius:6px;background:#fff}
+.sheet-link:hover{background:#E1F5EE}
+.inst-note{font-size:12px;color:#AAA;margin-bottom:1rem;max-width:780px;line-height:1.5}
+</style>
+</head>
+<body>
+
+<!-- LANDING -->
+<div id="screen-landing" class="screen active">
+  <div class="lhouse">&#127968;</div>
+  <div class="ltitle">Mr. H. Is Going Home</div>
+  <div class="lsub">A clinical escape room &middot; PNUR 121 Chapter 13</div>
+  <div class="lsub2">Work with your partner to unlock all 8 rooms before time runs out.<br>Your written responses are automatically saved to your instructor.</div>
+  <div class="lform">
+    <label>Your group name</label>
+    <input type="text" id="gni" placeholder="e.g. Group 3, or both your names" />
+    <button class="btnp" onclick="startGame()">Enter the house &#8594;</button>
+    <hr class="divider"/>
+    <label>Instructor access code</label>
+    <input type="password" id="ici" placeholder="Instructors only" />
+    <button class="btnp" onclick="instLogin()" style="background:#0E7C7B;margin-top:.4rem">Open instructor dashboard &#8594;</button>
+  </div>
+</div>
+
+<!-- MAP -->
+<div id="screen-map" class="screen">
+  <div class="topbar"><span class="ttl">&#127968; Mr. H.'s House</span><span id="mt" class="tpill">35:00</span></div>
+  <div class="pblabel"><span id="prog-label">0 of 8 rooms unlocked</span><span id="prog-pct">0%</span></div>
+  <div class="pbwrap"><div class="pbfill" id="pf" style="width:0%"></div></div>
+  <div id="hgrid" class="hgrid"></div>
+</div>
+
+<!-- ROOM -->
+<div id="screen-room" class="screen">
+  <div class="topbar"><span class="ttl" id="rtt">Room</span><span id="rt" class="tpill">35:00</span></div>
+  <div class="card">
+    <div id="ctag" class="ctag" style="display:none">&#9889; Collision Scenario</div>
+    <div class="ctitle" id="rsys">System</div>
+    <div style="font-size:18px;font-weight:700;margin-bottom:1rem;color:#1B3A6B" id="rtitle">Title</div>
+    <div class="sitbox" id="rsit"></div>
+    <div class="blkbox">
+      <div class="blklbl">&#9888; A colleague suggests:</div>
+      <div class="blktxt" id="rblk"></div>
+    </div>
+    <div class="tlbl" style="margin-bottom:.4rem">Your task:</div>
+    <div style="font-size:14px;color:#444;margin-bottom:.75rem;line-height:1.6">Explain why your colleague's suggestion is wrong, then describe the correct nursing approach.</div>
+    <textarea class="rinput" id="rreas" placeholder="Write your reasoning here before entering the unlock word&#8230;" oninput="updateCount()"></textarea>
+    <div class="char-count" id="char-count">0 words</div>
+    <div class="unlockbox">
+      <div class="unlocklbl">&#128273; To find the unlock word, answer this question:</div>
+      <div class="unlocktxt" id="runlockq"></div>
+    </div>
+    <div class="hintrow">
+      <button class="btnhint" onclick="showHint()">&#128161; Request a hint from your instructor</button>
+    </div>
+    <div class="hintbox" id="hbox"></div>
+    <div class="tlbl">Enter the unlock word:</div>
+    <div class="crow">
+      <input class="cinput" id="ci" placeholder="WORD" autocomplete="off" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z]/g,'')" onkeydown="if(event.key==='Enter')tryUnlock()" />
+      <button class="btnunlock" onclick="tryUnlock()">Unlock &#8594;</button>
+    </div>
+    <div class="fbbox" id="rfb"></div>
+    <button class="btnback" onclick="goToMap()">&#8592; Back to map</button>
+  </div>
+</div>
+
+<!-- VICTORY -->
+<div id="screen-victory" class="screen">
+  <div class="vico">&#127881;</div>
+  <div class="vtitle">Case closed!</div>
+  <div class="vsub">Mr. H. is safe at home.<br>All 8 rooms unlocked.</div>
+  <div class="tbadge" id="vtime"></div>
+  <div class="vic-actions">
+    <button class="btn-dl" onclick="downloadResponses()">&#8595; Download your response sheet</button>
+    <div class="submit-status" id="submit-status">Saving responses to instructor&#8230;</div>
+  </div>
+  <div style="font-size:13px;color:#AAA;margin-top:1.5rem;max-width:400px;line-height:1.6;text-align:center">Stand by for class debrief. Be ready to share your reasoning for at least one room with the group.</div>
+</div>
+
+<!-- INSTRUCTOR -->
+<div id="screen-instructor" class="screen">
+  <div class="ihead">
+    <div class="ititl">Instructor Dashboard</div>
+    <button class="iref" onclick="loadDash()">&#8635; Refresh</button>
+  </div>
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num" id="stat-groups">0</div><div class="stat-lbl">Groups on this device</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-done">0</div><div class="stat-lbl">Completed</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-avg">&#8212;</div><div class="stat-lbl">Avg rooms done</div></div>
+  </div>
+  <a class="sheet-link" href="https://docs.google.com/spreadsheets/d/1zBM5rIK1FpC6Oiq0HAw3PT4yb0OFEHHu2OtrH3AZIME/edit" target="_blank">&#128202; Open Google Form responses &#8594;</a>
+  <div class="inst-note">Google Form captures all group responses automatically when rooms are unlocked. The dashboard below shows groups who used <em>this specific device</em> and includes expandable written responses &#8212; click any group card to review their reasoning room by room.</div>
+  <button class="ktog" onclick="toggleKey()">Show answer key</button>
+  <div class="akey" id="akey">
+    <div class="akroom"><strong>Room 1 &#8212; Kitchen (Neurological / Stroke)</strong><br>Unlock word: <span class="ak-word">ASPIRATION</span><br>Wet voice + cough on thin liquid = aspiration. Small bites/upright does not address dysphagia. Stop oral intake, notify RN, speech therapy eval, NPO until assessed. Thin liquids harder than solids post-stroke.</div>
+    <div class="akroom"><strong>Room 2 &#8212; Bedroom (Cardiovascular / CHF)</strong><br>Unlock word: <span class="ak-word">REPORT</span><br>3 lb overnight + ankle edema = CHF exacerbation signal &#8212; must be reported immediately. Not normalized or reassured. Assess edema, auscultate lungs, check weight protocol, contact provider.</div>
+    <div class="akroom"><strong>Room 3 &#8212; Living Room (Neurological / Right Hemisphere Stroke)</strong><br>Unlock word: <span class="ak-word">ANOSOGNOSIA</span><br>Right hemisphere = cannot perceive own deficits. Patient genuinely believes he is fine. Fall precautions, assisted ambulation, family education that this is neurological.</div>
+    <div class="akroom"><strong>Room 4 &#8212; Bathroom (Musculoskeletal / SDOH)</strong><br>Unlock word: <span class="ak-word">CAREGIVER</span><br>Mrs. H. is informal caregiver AND patient. Pushing through pain is harmful. OT referral, blister packs, home health nurse for medications, county agency on aging.</div>
+    <div class="akroom"><strong>Room 5 &#8212; Dining Room (Metabolic / Type 2 Diabetes)</strong><br>Unlock word: <span class="ak-word">HYPOGLYCEMIA</span><br>BG 58 = hypoglycemia. First action for conscious patient: 15g fast-acting carbs, recheck in 15 min (15-15 rule). 911 not first action. Older adults: symptoms mimic normal aging.</div>
+    <div class="akroom"><strong>Room 6 &#8212; Back Porch (Pulmonary / COPD)</strong><br>Unlock word: <span class="ak-word">VACCINATE</span><br>Cessation benefits occur at any age. Primary COPD priority = prevent infections. Influenza + pneumococcal vaccines are #1 intervention. Confirm current and obtain orders if not.</div>
+    <div class="akroom"><strong>Room 7 &#8212; Hallway (Sensory / Neurological)</strong><br>Unlock word: <span class="ak-word">SAFETY</span><br>Documentation alone insufficient when patient nearly falls. Cataracts + glaucoma + left stroke weakness = compounding fall risk. Fall precautions, lighting, provider notification, eye exam follow-up.</div>
+    <div class="akroom"><strong>Room 8 &#9889; &#8212; Front Door (SDOH Collision)</strong><br>Unlock word: <span class="ak-word">RESOURCES</span><br>Education cannot solve food access. SDOH = systems intervention: Meals on Wheels, county aging services, social worker, family care conference. Fluid/CHF tension: daily weights + provider clarification.</div>
+  </div>
+  <div id="dashcontent"><div class="nogrp">Loading&#8230;</div></div>
+</div>
+
+<script>
+var FORM_URL='https://script.google.com/macros/s/AKfycbwHamAFltfpRCiXp_1c3DL0SVCkH-Mpib0pFQ7cda5Y64CMAEhr6Lt_rjbkecPBX2RI/exec';
+var FIELDS={groupName:'entry.89523304',r1:'entry.1790501222',r2:'entry.31769818',r3:'entry.1842929355',r4:'entry.2119187913',r5:'entry.153427307',r6:'entry.186167798',r7:'entry.1812642972',r8:'entry.1424213479',roomsDone:'entry.1042633093',time:'entry.1336176873'};
+var ROOMS=[
+  {id:1,icon:'Dish',name:'Kitchen',system:'Neurological - Stroke',title:'Mr. H. sits down for his first meal at home.',situation:"Mrs. H. has made chicken soup - Mr. H.'s favorite. After his first few spoonfuls of broth, he begins coughing violently. When he speaks, his voice sounds wet and gurgling. He says he feels fine and wants to continue eating.",blocker:"\"He's probably just eating too fast. Encourage him to slow down, take smaller bites, and sit upright at 90 degrees.\"",unlockQ:'What is the suspected complication Mr. H. is experiencing right now - the specific clinical term for what happens when food or liquid enters the airway instead of the esophagus?',hint:'Think about what a wet, gurgling voice immediately after swallowing tells you about where the liquid went. The chapter specifically states that stroke patients frequently have more difficulty with thin liquids than with solids.',code:'ASPIRATION',isCollision:false},
+  {id:2,icon:'Bed',name:'Bedroom',system:'Cardiovascular - CHF',title:'Morning weigh-in - day 2 at home.',situation:"Mrs. H. calls the home health line and reports that Mr. H. has gained 3 pounds overnight. His shoes are tight and she can see swelling at his ankles. He is not short of breath at rest. She says 'He had a big dinner last night - is this just water weight?'",blocker:"\"Reassure Mrs. H. that some swelling is normal after a stroke and will likely resolve on its own. Tell her to call back if his breathing becomes difficult.\"",unlockQ:'What is the single most important nursing action when a CHF patient reports a 3-pound overnight weight gain? Use one word - the action that must happen immediately before anything else.',hint:'The chapter is very specific about what a documented overnight weight gain means in CHF patients. Reassurance without assessment is never the correct answer. Think about who needs to know about this finding.',code:'REPORT',isCollision:false},
+  {id:3,icon:'Sofa',name:'Living Room',system:'Neurological - Right Hemisphere Stroke',title:'Mr. H. wants his independence back.',situation:"Mr. H. tries to stand from the couch to walk to the kitchen unassisted. He says 'I feel perfectly fine - I don't need help. You're all overreacting.' He has left arm weakness and cannot recognize the physical therapist when she arrives, but he does not seem to notice or care about either problem.",blocker:"\"Allow him to attempt ambulation with one person walking beside him. Confidence and independence are important for stroke recovery, and refusing his wishes may damage the therapeutic relationship.\"",unlockQ:"The chapter names a specific clinical term for the neurological symptom where a right hemisphere stroke patient is genuinely unaware of their own deficits and truly believes they are fine. What is that term?",hint:'Look at the bulleted list in Chapter 13 for right hemisphere stroke characteristics. One bullet describes exactly this situation - the patient is not in denial, they neurologically cannot perceive their own impairment.',code:'ANOSOGNOSIA',isCollision:false},
+  {id:4,icon:'Bath',name:'Bathroom',system:'Musculoskeletal - SDOH',title:'The medication problem.',situation:"Mr. H.'s medications are in childproof bottles on the bathroom counter. Mrs. H. tells the home health nurse her hands hurt too much to open them today - her osteoarthritis has flared up. Mr. H.'s morning medications are now 3 hours late, and Mrs. H. is tearful and exhausted.",blocker:"\"Encourage Mrs. H. to push through the discomfort and try harder to open the bottles - her husband's medications are a priority, and she just needs to find a way to manage.\"",unlockQ:"Mrs. H. fills a specific role in Mr. H.'s care at home - one the chapter discusses in the context of chronic conditions. She has her own chronic condition AND is responsible for his care. What is the one-word term for the role she is struggling to maintain?",hint:"The chapter talks about who provides care for people with chronic conditions at home - it isn't the formal health care system. What does the chapter call the family members and friends who fill this role?",code:'CAREGIVER',isCollision:false},
+  {id:5,icon:'Food',name:'Dining Room',system:'Metabolic - Type 2 Diabetes',title:"10 AM - Mr. H. isn't acting right.",situation:"Mr. H. appears confused and weak. He is sweating and his hands are shaking. The home health nurse checks his blood glucose: 58 mg/dL. Mrs. H. panics and reaches for the phone to call 911.",blocker:"\"Call 911 immediately - a blood glucose of 58 is a medical emergency requiring hospital transport and IV dextrose.\"",unlockQ:'Mr. H. is conscious and able to speak. Before calling anyone, what one word names the clinical condition that occurs when blood glucose drops below 70 mg/dL - the condition Mr. H. is experiencing right now?',hint:'The chapter notes that symptoms like confusion and weakness in older adults with diabetes are often mistaken for normal aging. What is the clinical term for this blood glucose reading, and what is the appropriate first nursing action for a conscious patient?',code:'HYPOGLYCEMIA',isCollision:false},
+  {id:6,icon:'Porch',name:'Back Porch',system:'Pulmonary - COPD',title:'The morning cigarette.',situation:"The home health nurse finds Mr. H. on the back porch smoking. He says 'I've smoked since I was 15. I've had a stroke already. What's the point of stopping now?' He has a barrel chest and uses his shoulder muscles to breathe with exertion. His vaccine history is unclear.",blocker:"\"Agree with him that cessation at age 84 after 70 years of smoking offers minimal clinical benefit and would add unnecessary stress during stroke recovery.\"",unlockQ:"Beyond smoking cessation, the chapter identifies one specific type of intervention as the highest priority for preventing COPD complications in older adults. It prevents the most common and dangerous COPD trigger. What type of intervention is this?",hint:'Chapter 13 lists self-care teaching for COPD patients. The very first bullet is about preventing infections. Think about what specific preventive measure protects older adults from respiratory infections most effectively.',code:'VACCINATE',isCollision:false},
+  {id:7,icon:'Hall',name:'Hallway',system:'Sensory - Neurological',title:'The glasses problem.',situation:"Mr. H. refuses to wear his glasses. He says 'I can see fine without them.' As the home health nurse watches, he walks directly into the doorframe of the bathroom and grabs the wall to avoid falling. His chart shows worsening bilateral cataracts and a 2-year-old diagnosis of glaucoma.",blocker:"\"Document that the patient declines use of assistive devices and respect his decision. You cannot force him to wear his glasses - patient autonomy must be honored.\"",unlockQ:"Patient autonomy is real - but documenting refusal and moving on is not the correct nursing response when a patient nearly falls. What is the nurse's single most important clinical priority in this moment?",hint:'Think about what glaucoma does to peripheral vision, and how that combines with left-sided weakness from his right hemisphere stroke when moving through a home environment. Documentation is one step - but what must the nurse address clinically right now?',code:'SAFETY',isCollision:false},
+  {id:8,icon:'Home',name:'Front Door',system:'SDOH - Collision Scenario',title:'Two problems fighting each other.',situation:"The home health nurse surveys the kitchen: almost no food - just fast food containers and crackers. Mrs. H. cannot drive due to her osteoarthritis. Their children live 50 miles away and work full time. Mr. H.'s diet must be low sodium for his CHF and heart-healthy for his CAD. He also needs 1,500-2,000 mL of fluid daily for stroke recovery - but Mrs. H. is afraid to give him fluids because 'last time his ankles swelled up.' Both the food access problem and the fluid vs. CHF tension must be addressed.",blocker:"\"Provide both Mr. and Mrs. H. with written materials about the DASH diet and low-sodium food choices, and remind him to drink more water throughout the day.\"",unlockQ:"Written education cannot solve a food access problem rooted in inability to drive, no nearby family, and limited income. This situation requires connecting the family to outside support systems. What one word describes the category of help this family needs?",hint:"The chapter specifically lists community resources available to older adults. When a patient's problem is social rather than clinical - food access, transportation, caregiver support - what category of intervention does the nurse initiate?",code:'RESOURCES',isCollision:true}
+];
+var ICONS={'Dish':'🍽️','Bed':'🛏️','Sofa':'🛋️','Bath':'🚿','Food':'🍊','Porch':'🪑','Hall':'🚪','Home':'🏡'};
+var TOTAL=35*60,ICODE='FLOOD2025';
+var gname='',solved=new Set(),reasoning={},curRoom=null,timerInt=null,secsLeft=TOTAL,startTime=null,finishTime=null;
+
+function startGame(){var n=document.getElementById('gni').value.trim();if(!n){alert('Please enter your group name.');return;}gname=n;startTime=Date.now();secsLeft=TOTAL;buildMap();showScreen('map');startTimer();}
+function instLogin(){var c=document.getElementById('ici').value.trim();if(c===ICODE){showScreen('instructor');loadDash();}else{alert('Incorrect instructor code.');}}
+
+function buildMap(){
+  var g=document.getElementById('hgrid');g.innerHTML='';
+  ROOMS.forEach(function(r,i){
+    var unlk=i===0||solved.has(ROOMS[i-1].id);
+    var slvd=solved.has(r.id);
+    var b=document.createElement('button');
+    b.className='rbtn'+(slvd?' solved':'');b.disabled=!unlk&&!slvd;
+    b.innerHTML='<div class="rico">'+ICONS[r.icon]+'</div><div style="flex:1"><div class="rname">'+r.name+'</div><div class="rsys">'+r.system+'</div></div><div class="rbadge '+(slvd?'bd':unlk?'bo':'bl')+'">'+(slvd?'Done':unlk?'Open':'Locked')+'</div>';
+    b.onclick=function(){openRoom(r.id);};g.appendChild(b);
+  });
+  var pct=Math.round((solved.size/ROOMS.length)*100);
+  document.getElementById('pf').style.width=pct+'%';
+  document.getElementById('prog-label').textContent=solved.size+' of '+ROOMS.length+' rooms unlocked';
+  document.getElementById('prog-pct').textContent=pct+'%';
+}
+
+function openRoom(id){
+  var r=ROOMS.filter(function(x){return x.id===id;})[0];curRoom=r;
+  document.getElementById('rtt').textContent=ICONS[r.icon]+' '+r.name;
+  document.getElementById('rsys').textContent=r.system;
+  document.getElementById('rtitle').textContent=r.title;
+  document.getElementById('rsit').textContent=r.situation;
+  document.getElementById('rblk').textContent=r.blocker;
+  document.getElementById('runlockq').textContent=r.unlockQ;
+  document.getElementById('ctag').style.display=r.isCollision?'inline-block':'none';
+  document.getElementById('ci').value='';
+  document.getElementById('rreas').value=reasoning[r.id]||'';
+  document.getElementById('rfb').className='fbbox';
+  document.getElementById('hbox').className='hintbox';
+  updateCount();showScreen('room');
+}
+
+function updateCount(){var w=document.getElementById('rreas').value.trim().split(/\s+/).filter(function(x){return x;}).length;document.getElementById('char-count').textContent=w+' word'+(w===1?'':'s');}
+function showHint(){var b=document.getElementById('hbox');b.innerHTML='<strong>Instructor hint:</strong> '+curRoom.hint;b.className='hintbox show';}
+
+function tryUnlock(){
+  var v=document.getElementById('ci').value.trim().toUpperCase();
+  var text=document.getElementById('rreas').value.trim();
+  var fb=document.getElementById('rfb');
+  if(!v){fb.textContent='Please enter the unlock word first.';fb.className='fbbox wrong show';return;}
+  if(v===curRoom.code){
+    if(text)reasoning[curRoom.id]=text;
+    fb.textContent='Correct! Room unlocked.';fb.className='fbbox correct show';
+    solved.add(curRoom.id);
+    submitRoomToForm(curRoom.id,text);saveLocal();
+    setTimeout(function(){if(solved.size===ROOMS.length){showVic();}else{goToMap();}},1000);
+  }else{fb.textContent='Not quite - review the unlock question and try again.';fb.className='fbbox wrong show';}
+}
+
+function goToMap(){var t=document.getElementById('rreas').value.trim();if(t&&curRoom)reasoning[curRoom.id]=t;buildMap();showScreen('map');}
+
+function showVic(){
+  finishTime=Date.now();
+  var e=Math.round((finishTime-startTime)/1000);
+  var m=Math.floor(e/60),s=e%60;
+  var ts=m+'m '+String(s).padStart(2,'0')+'s';
+  document.getElementById('vtime').textContent='Completed in '+ts;
+  clearInterval(timerInt);submitFinalToForm(ts);saveLocal();showScreen('victory');
+}
+
+function submitRoomToForm(roomId,text){
+  if(!text)return;
+  var key='r'+roomId;if(!FIELDS[key])return;
+  var params={groupName:gname+' - Room '+roomId,roomsDone:'Room '+roomId+' unlocked'};
+  params[key]=text;
+  fetch(FORM_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(params)}).catch(function(){});
+}
+
+function submitFinalToForm(timeStr){
+  var params={groupName:gname+' - FINAL SUBMISSION',roomsDone:solved.size+'/'+ROOMS.length+' rooms completed',time:timeStr};
+  ROOMS.forEach(function(r){params['r'+r.id]=reasoning[r.id]||'(no response entered)';});
+  var status=document.getElementById('submit-status');
+  fetch(FORM_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(params)})
+    .then(function(){status.textContent='Responses saved to instructor successfully.';status.className='submit-status ok';})
+    .catch(function(){status.textContent='Could not reach server - use the download button below.';status.className='submit-status err';});
+}
+
+function downloadResponses(){
+  var e=Math.round(((finishTime||Date.now())-startTime)/1000);
+  var m=Math.floor(e/60),s=e%60;
+  var txt='PNUR 121 - Chapter 13 Escape Room\nMr. H. Is Going Home\n';
+  txt+='Group: '+gname+'\nCompleted: '+new Date().toLocaleString()+'\nTime: '+m+'m '+String(s).padStart(2,'0')+'s\n';
+  txt+='Rooms Unlocked: '+solved.size+'/'+ROOMS.length+'\n'+'='.repeat(60)+'\n\n';
+  ROOMS.forEach(function(r){
+    txt+=ICONS[r.icon]+' ROOM '+r.id+' - '+r.name.toUpperCase()+'\nSystem: '+r.system+'\n'+'-'.repeat(40)+'\n';
+    txt+='Situation:\n'+r.situation+'\n\nColleague suggestion:\n'+r.blocker+'\n\nUnlock question:\n'+r.unlockQ+'\n\n';
+    txt+='Your reasoning:\n'+(reasoning[r.id]||'(no response entered)')+'\n\nStatus: '+(solved.has(r.id)?'UNLOCKED':'Not completed')+'\n'+'='.repeat(60)+'\n\n';
+  });
+  var blob=new Blob([txt],{type:'text/plain'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='PNUR121_Ch13_EscapeRoom_'+gname.replace(/\s+/g,'_')+'.txt';a.click();URL.revokeObjectURL(a.href);
+}
+
+function startTimer(){clearInterval(timerInt);timerInt=setInterval(function(){secsLeft--;updTimer();if(secsLeft<=0)clearInterval(timerInt);},1000);}
+function updTimer(){var m=Math.floor(secsLeft/60),s=secsLeft%60;var str=m+':'+String(s).padStart(2,'0');var u=secsLeft<=300;['mt','rt'].forEach(function(id){var el=document.getElementById(id);if(el){el.textContent=str;el.className='tpill'+(u?' urgent':'');}});}
+function showScreen(n){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById('screen-'+n).classList.add('active');}
+
+function saveLocal(){
+  try{var data={groupName:gname,solvedRooms:Array.from(solved),reasoning:reasoning,total:ROOMS.length,completed:solved.size===ROOMS.length,timestamp:Date.now()};localStorage.setItem('escape_'+gname.replace(/\s+/g,'_'),JSON.stringify(data));var all=JSON.parse(localStorage.getItem('escape_all_groups')||'[]');var key='escape_'+gname.replace(/\s+/g,'_');if(all.indexOf(key)===-1){all.push(key);localStorage.setItem('escape_all_groups',JSON.stringify(all));}}catch(e){}
+}
+
+function loadDash(){
+  var c=document.getElementById('dashcontent');
+  try{
+    var all=JSON.parse(localStorage.getItem('escape_all_groups')||'[]');
+    if(!all.length){c.innerHTML='<div class="nogrp">No groups on this device yet.<br>Google Form responses are visible via the link above.<br>Groups appear here when they use this same device.</div>';return;}
+    var html='',total=0,doneCount=0,roomSum=0;
+    all.forEach(function(k){
+      try{
+        var d=JSON.parse(localStorage.getItem(k));if(!d)return;
+        total++;if(d.completed)doneCount++;roomSum+=d.solvedRooms.length;
+        var pct=Math.round((d.solvedRooms.length/d.total)*100);
+        var dots=ROOMS.map(function(r){var dn=d.solvedRooms.indexOf(r.id)>-1;return'<div class="dot '+(dn?'ddone':'dpend')+'" title="'+r.name+'">'+(dn?'&checkmark;':r.id)+'</div>';}).join('');
+        var rid='resp_'+k.replace(/[^a-z0-9]/gi,'_');
+        var rp=ROOMS.map(function(r){var t=(d.reasoning&&d.reasoning[r.id])||'';return'<div class="resp-room"><div class="resp-room-title">'+ICONS[r.icon]+' Room '+r.id+' &mdash; '+r.name+'</div>'+(t?'<div class="resp-room-text">'+t.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</div>':'<div class="resp-empty">No response recorded</div>')+'</div>';}).join('');
+        html+='<div class="gcard"><div class="ghdr" onclick="toggleResp(\''+rid+'\')"><div class="gname">'+d.groupName+(d.completed?' &#127881;':'')+'</div><div class="gpct">'+d.solvedRooms.length+'/'+d.total+' rooms &middot; '+pct+'% &middot; click to view responses &darr;</div></div><div class="rdots">'+dots+'</div><div class="responses-panel" id="'+rid+'">'+rp+'</div></div>';
+      }catch(e){}
+    });
+    document.getElementById('stat-groups').textContent=total;
+    document.getElementById('stat-done').textContent=doneCount;
+    document.getElementById('stat-avg').textContent=total?Math.round(roomSum/total)+'/'+ROOMS.length:'&mdash;';
+    c.innerHTML=html||'<div class="nogrp">No data found.</div>';
+  }catch(e){c.innerHTML='<div class="nogrp">Could not load data.</div>';}
+}
+
+function toggleResp(id){var p=document.getElementById(id);if(p)p.classList.toggle('open');}
+function toggleKey(){var k=document.getElementById('akey');k.classList.toggle('show');document.querySelector('.ktog').textContent=k.classList.contains('show')?'Hide answer key':'Show answer key';}
+
+updTimer();
+</script>
+</body>
+</html>
+
