@@ -210,7 +210,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F4F6F9;min-height:1
   <button class="ktog" onclick="toggleKey()">Show answer key</button>
   <div class="akey" id="akey">
     <div class="akroom"><strong>Room 1 &mdash; Admissions Office (Ch13 &mdash; Stroke)</strong> Unlock: <span class="ak-word">APHASIA</span> Left hemisphere stroke = expressive aphasia + right-sided weakness. Right hemisphere = poor awareness, impulsivity, difficulty recognizing faces. Never assume cognitive impairment from aphasia. Communicate: yes/no questions, slow speech, gestures, extra time.</div>
-    <div class="akroom"><strong>Room 2 &mdash; Medication Room (Ch13 &mdash; HTN)</strong> Unlock: <span class="ak-word">COMPLIANCE</span> Normal BP on medication does not mean HTN resolved &mdash; it means the medication is working. Stopping lisinopril risks rebound HTN. Silent damage continues. Assess for nonproductive cough (ACE inhibitor side effect) and address with provider.</div>
+    <div class="akroom"><strong>Room 2 &mdash; Medication Room (Ch13 &mdash; HTN)</strong> Unlock: <span class="ak-word">NONCOMPLIANCE</span> Normal BP on medication does not mean HTN resolved &mdash; it means the medication is working. Stopping lisinopril risks rebound HTN. Silent damage continues. Assess for nonproductive cough (ACE inhibitor side effect) and address with provider.</div>
     <div class="akroom"><strong>Room 3 &mdash; Ellie's Room &mdash; Night (Ch15 &mdash; Falls)</strong> Unlock: <span class="ak-word">NOCTURIA</span> Furosemide + nocturia = highest fall risk window is overnight. Bed alarm alone is insufficient. Scheduled q2h toileting, call light in functional right hand, bed at lowest position, clear path, adequate nighttime lighting. Right-sided weakness affects dominant side.</div>
     <div class="akroom"><strong>Room 4 &mdash; Bathroom (Ch15 &mdash; Incontinence)</strong> Unlock: <span class="ak-word">FUNCTIONAL</span> Bladder and urethra work normally &mdash; aphasia prevents calling for help, weakness slows mobility. Foley catheter is never first intervention (UTI risk). Habit training = caregiver takes her on schedule. Prompted voiding also appropriate.</div>
     <div class="akroom"><strong>Room 5 &mdash; Dining Room (Ch13/15 &mdash; Aspiration/Nutrition)</strong> Unlock: <span class="ak-word">ASPIRATION</span> Wet gurgling voice = aspiration. Stop all oral intake, notify RN, speech therapy swallowing eval before anything PO. Thin liquids harder than solids post-stroke. Albumin 2.8 = protein malnutrition = impaired healing. Dietitian consult needed.</div>
@@ -259,14 +259,14 @@ var ROOMS=[
    blk:'"Her blood pressure is finally normal. We should hold the lisinopril and see if she can maintain this on her own — she is clearly doing well without it."',
    unlockQ:"What one word describes the dangerous pattern when patients stop taking their HTN medication because they feel fine — and what does the chapter say happens to vascular damage when someone does this?",
    hint:"Chapter 13 is explicit about what happens when people stop HTN medication because they feel well. The damage to vessels does not pause just because there are no symptoms. What is the term for this dangerous pattern?",
-   code:'COMPLIANCE',isCollision:false},
+   code:'NONCOMPLIANCE',isCollision:false},
 
   {id:3,icon:'🌙',name:"Ellie's Room — Night",sys:'Chapter 15 — Falls',chap:'ch15',day:'Day 2',
    title:'It is 11 PM. Ellie is asleep.',
    sit:"Ellie takes furosemide every morning. Her intake records show she typically wakes 3 to 4 times per night to urinate. She has right-sided weakness from her stroke — her right hand, which was dominant, has reduced grip strength. Her room has a standard hospital bed at mid-height. The call light is clipped to the right side rail. The bathroom is 12 feet away with a small nightlight.",
    blk:'"Put a bed alarm on and add her to the q2h check list. That should be enough to keep her safe overnight."',
    unlockQ:"Ellie takes a diuretic and wakes multiple times per night to urinate. What is the clinical term for excessive nighttime urination — and why does this specific combination make overnight her highest-risk window for a fall?",
-   hint:"Think about when the diuretic is working hardest and what Ellie has to do multiple times overnight because of it. Chapter 15 lists nocturia specifically as a fall risk factor. What is the medical term for that symptom?",
+   hint:"Think about when the diuretic is working hardest and what Ellie has to do multiple times overnight because of it. Chapter 15 lists excessive nighttime urination specifically as a fall risk factor. What is the medical term for that symptom?",
    code:'NOCTURIA',isCollision:false},
 
   {id:4,icon:'🚿',name:'Bathroom',sys:'Chapter 15 — Incontinence',chap:'ch15',day:'Day 3',
@@ -338,7 +338,7 @@ var ROOMS=[
    sit:"Carol arrives and tells the team she is taking Ellie home today. She has arranged for a hospital bed in the living room. Ellie's home is a two-story house — the bedroom and bathroom are upstairs. Carol works full time. Ellie still has expressive aphasia, right-sided weakness, a Stage I pressure injury, functional incontinence, early signs of depression, and an unresolved aspiration risk. Ellie writes on her whiteboard: 'HOME.'",
    blk:'"The patient and family have made their decision. Document their wishes and begin the discharge process."',
    unlockQ:"This situation involves competing clinical, ethical, and social concerns that cannot be resolved by documentation alone. What specific type of support system does the chapter describe when a patient needs coordination of food, transportation, caregiver relief, and community care to safely return home?",
-   hint:"Chapter 13 and the SDOH sections describe what happens when a patient's needs exceed what one caregiver can provide. The answer involves a category of intervention — not a single resource but a network of community supports. What one word describes what this family needs access to?",
+   hint:"Chapter 13 and the SDOH sections describe what happens when a patient's needs exceed what one caregiver can provide. The answer involves a category of intervention — not a single program but a network of community supports including Meals on Wheels, home health, and county aging services. What one word describes this category?",
    code:'RESOURCES',isCollision:true},
 ];
 
